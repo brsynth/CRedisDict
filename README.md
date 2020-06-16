@@ -15,10 +15,6 @@ Data structure to implement a dictionary whose keys and values can complex data 
 
 * **Joan Hérisson**
 
-## Acknowledgments
-
-* Thomas Duigou
-
 
 ## Licence
 RedisDict is released under the MIT licence. See the LICENCE file for details.
