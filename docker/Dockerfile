@@ -1,10 +1,13 @@
-FROM python:3
+FROM python:3-alpine
 
-RUN python3 -m pip install --user --upgrade setuptools wheel \
-&& python3 -m pip install --user --upgrade twine
+RUN apk update \
+ && apk add \
+      gcc \
+      musl-dev libffi-dev libressl-dev
 
-WORKDIR /home
-RUN mkdir CRedisDict
-COPY src/CRedisDict.py CRedisDict/__init__.py
-COPY src/setup.py LICENSE README.md ./
-RUN ls -lah CRedisDict
+RUN python3 -m pip install --upgrade pip \
+ && python3 -m pip install --user --upgrade setuptools wheel \
+ && python3 -m pip install --user --upgrade twine
+
+ARG HOME
+WORKDIR ${HOME}
