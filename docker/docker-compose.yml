@@ -21,8 +21,7 @@ services:
         IMAGE: ${BASE_IMAGE}
     image: brsynth/${COMPOSE_PROJECT_NAME}
     command: sh -c "
-                cd src
-             && python3 setup.py sdist bdist_wheel
+                python3 setup.py sdist bdist_wheel
              && python3 -m twine upload --repository ${TEST}pypi dist/*"
     networks:
       - db
