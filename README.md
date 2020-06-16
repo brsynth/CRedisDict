@@ -4,7 +4,9 @@ Data structure to implement a dictionary whose keys and values can complex data 
 
 ## Prerequisites
 
-* Python 3 (with `redis` module)
+* Python 3 with the following modules:
+    * redis
+    * json
 
 
 ## Authors
@@ -13,4 +15,4 @@ Data structure to implement a dictionary whose keys and values can complex data 
 
 
 ## Licence
-RedisDict is released under the MIT licence. See the LICENCE file for details.
+CRedisDict is released under the MIT licence. See the LICENCE file for details.
