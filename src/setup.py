@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="CRedisDict",
-    version="0.1.1",
+    version="0.1.2",
     author="Joan Hérisson",
     author_email="joan.herisson@univ-evry.fr",
     description="Dictionnary with complex data stored in a Redis database",
@@ -14,7 +14,7 @@ setuptools.setup(
     url="https://github.com/brsynth/CRedisDict",
     packages=setuptools.find_packages(),
     install_requires=[
-        'redis', 'json'
+        'redis',
     ],
     classifiers=[
         "Programming Language :: Python :: 3",

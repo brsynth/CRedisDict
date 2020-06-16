@@ -6,7 +6,6 @@ Data structure to implement a dictionary whose keys and values can complex data 
 
 * Python 3 with the following modules:
     * redis
-    * json
 
 
 ## Authors
