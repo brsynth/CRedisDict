@@ -4,8 +4,8 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="Redis-Dict", # Replace with your own username
-    version="0.0.2",
+    name="ComplexRedisDict",
+    version="0.0.3",
     author="Joan Hérisson",
     author_email="joan.herisson@univ-evry.fr",
     description="Dictionnary stored in a Redis database",
