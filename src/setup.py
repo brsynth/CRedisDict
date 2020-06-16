@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="ComplexRedisDict",
-    version="0.0.3",
+    version="0.0.4",
     author="Joan Hérisson",
     author_email="joan.herisson@univ-evry.fr",
     description="Dictionnary stored in a Redis database",
