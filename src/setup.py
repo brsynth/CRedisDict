@@ -5,13 +5,13 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="ComplexRedisDict",
-    version="0.0.8",
+    version="0.0.9",
     author="Joan Hérisson",
     author_email="joan.herisson@univ-evry.fr",
     description="Dictionnary with complex data stored in a Redis database",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/brsynth/RedisDict",
+    url="https://github.com/brsynth/CRedisDict",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
