@@ -9,7 +9,7 @@ from json import dumps as json_dumps
 from redis import Redis
 
 
-class RedisDict:
+class CRedisDict:
     """A redis based dict."""
 
     def __init__(self, name, redis, data={}):
