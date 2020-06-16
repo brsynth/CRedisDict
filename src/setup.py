@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="ComplexRedisDict",
+    name="CRedisDict",
     version="0.0.9",
     author="Joan Hérisson",
     author_email="joan.herisson@univ-evry.fr",
