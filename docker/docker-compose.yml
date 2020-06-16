@@ -2,17 +2,6 @@ version: '2.4'
 
 services:
 
-  gen-req:
-    image: brsynth/${COMPOSE_PROJECT_NAME}.req
-    build:
-      context: ..
-      dockerfile: docker/req.dockerfile
-      args:
-        IMAGE: ${BASE_IMAGE}
-    command: sh -c 'pip-compile requirements.in > requirements.txt'
-    volumes:
-      - $PWD/..:/req
-
   module:
     build:
       context: ..
@@ -23,21 +12,3 @@ services:
     command: sh -c "
                 python3 setup.py sdist bdist_wheel
              && python3 -m twine upload --repository ${TEST}pypi dist/*"
-    networks:
-      - db
-
-  db:
-    image: redis:5-alpine
-    command: redis-server /usr/local/etc/redis/redis.conf --appendonly yes
-    networks:
-      db:
-    volumes:
-      - redis:/data
-      - $PWD/redis.conf:/usr/local/etc/redis/redis.conf
-    mem_limit: 1024m
-
-volumes:
-  redis:
-
-networks:
-  db:
