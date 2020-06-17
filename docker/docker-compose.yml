@@ -1,8 +1,7 @@
 version: '2.4'
 
-services:
-
-  pkg:
+x-common-pkg:
+   &default-pkg
     image: brsynth/twine
     build:
       context: ..
@@ -14,6 +13,35 @@ services:
       - ../src/setup.py:${HOMEDIR}/setup.py:ro
       - ../LICENSE:${HOMEDIR}/LICENSE:ro
       - ../README.md:${HOMEDIR}/README.md:ro
+
+services:
+
+  pkg-publish:
+    <<: *default-pkg
     command: sh -c "
                 python3 setup.py sdist bdist_wheel
              && python3 -m twine upload --repository ${TEST}pypi dist/*"
+
+  pkg-test:
+    <<: *default-pkg
+    command: python3 setup.py test
+    networks:
+      db:
+    depends_on:
+      - db
+
+  db:
+    image: redis:5-alpine
+    command: redis-server /usr/local/etc/redis/redis.conf --appendonly yes
+    networks:
+      db:
+    volumes:
+      - redis:/data
+      - ../redis/redis.conf:/usr/local/etc/redis/redis.conf
+    mem_limit: 1024M
+
+volumes:
+  redis:
+
+networks:
+  db:

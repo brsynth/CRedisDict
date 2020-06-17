@@ -16,7 +16,7 @@ services:
   tool:
     build:
       context: ../..
-      dockerfile: tests/docker/Dockerfile
+      dockerfile: test/docker/Dockerfile
       args:
         IMAGE: ${BASE_IMAGE}
     networks:

@@ -43,12 +43,23 @@ class CRedisDict:
     def __getitem__(self, key):
         item = self.redis.hget(self.name, key)
         # JSON for nested dictionnaries
-        if item: return json_loads(item)
+        return json_loads(item)
+        if item:
+            if isinstance(item,dict):
+                return json_loads(item)
+            else: return item
         else: raise KeyError
 
     def __setitem__(self, key, value):
-        # JSON for nested dictionnaries
         self.redis.hset(self.name, key, json_dumps(value))
+        return
+        if isinstance(value,dict):
+            # JSON for nested dictionnaries
+            self.redis.hset(self.name, key, json_dumps(value))
+        else: self.redis.hset(self.name, key, value)
+
+    def __delitem__(self, key):
+        return self.redis.hdel(self.name, key)
 
     def __eq__(self, redis_dict):
         self.name = redis_dict.name
