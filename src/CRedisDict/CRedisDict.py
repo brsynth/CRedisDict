@@ -43,7 +43,6 @@ class CRedisDict:
     def __getitem__(self, key):
         item = self.redis.hget(self.name, key)
         # JSON for nested dictionnaries
-        return json_loads(item)
         if item:
             if isinstance(item,dict):
                 return json_loads(item)
@@ -51,8 +50,6 @@ class CRedisDict:
         else: raise KeyError
 
     def __setitem__(self, key, value):
-        self.redis.hset(self.name, key, json_dumps(value))
-        return
         if isinstance(value,dict):
             # JSON for nested dictionnaries
             self.redis.hset(self.name, key, json_dumps(value))
