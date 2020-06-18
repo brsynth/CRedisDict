@@ -21,10 +21,11 @@ class TestCRedisDict(unittest.TestCase):
         self.redis = StrictRedis(host='db', port=6379, db=0, decode_responses=True)
         self.redis.flushall()
 
+    # Test init() with no data + dict()
     def test_initEmpty(self):
         self.redis.flushall()
         d = CRedisDict('d', self.redis)
-        self.assertEqual(d.dict(), CRedisDict('d', self.redis).dict())
+        self.assertEqual(d.dict(), {})
 
     def test_addInt(self):
         self.redis.flushall()
