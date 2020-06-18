@@ -25,8 +25,9 @@ class CRedisDict:
     def keys(self):
         return self.redis.hkeys(self.name)
 
-    def exists(self):
-        return self.redis.exists(self.name)
+    @staticmethod
+    def exists(redis, name):
+        return redis.exists(name)
 
     def len(self):
         return self.redis.hlen(self.name)
