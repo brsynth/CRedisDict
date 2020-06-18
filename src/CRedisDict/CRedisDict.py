@@ -4,8 +4,8 @@ Created on April 10 2020
 @author: Joan Hérisson
 """
 
-from jsonpickle import decode as json_loads
-from jsonpickle import encode as json_dumps
+from json import loads as json_loads
+from json import dumps as json_dumps
 from redis import Redis
 
 
@@ -20,7 +20,11 @@ class CRedisDict:
             self.__setitem__(key, data[key])
 
     def dict(self):
-        return self.redis.hgetall(self.name)
+        d1 = self.redis.hgetall(self.name)
+        d2 = {}
+        for key in d1:
+            d2[key] = json_loads(d1[key])
+        return d2
 
     def keys(self):
         return self.redis.hkeys(self.name)
