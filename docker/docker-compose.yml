@@ -2,12 +2,6 @@ version: '2.4'
 
 x-common-pkg:
    &default-pkg
-    image: brsynth/twine
-    build:
-      context: ..
-      dockerfile: docker/Dockerfile
-      args:
-        HOME: ${HOMEDIR}
     volumes:
       - ../src/${COMPOSE_PROJECT_NAME}:${HOMEDIR}/${COMPOSE_PROJECT_NAME}:ro
       - ../src/setup.py:${HOMEDIR}/setup.py:ro
@@ -18,17 +12,26 @@ services:
 
   pkg-publish:
     <<: *default-pkg
+    image: brsynth/twine
+    build:
+      context: ..
+      args:
+        HOME: ${HOMEDIR}
+        IMAGE: ${BASE_IMAGE}
+      dockerfile: docker/twine.dockerfile
     command: sh -c "
                 python3 setup.py sdist bdist_wheel
              && python3 -m twine upload --repository ${TEST}pypi dist/*"
 
   pkg-test:
     <<: *default-pkg
-    command: python3 setup.py test
-    networks:
-      db:
-    depends_on:
-      - db
+    build:
+      context: ..
+      args:
+        HOME: ${HOMEDIR}
+        IMAGE: ${BASE_IMAGE}
+      dockerfile: docker/tests.dockerfile
+    command: pytest
 
   db:
     image: redis:5-alpine

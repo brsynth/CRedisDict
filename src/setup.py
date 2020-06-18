@@ -13,9 +13,7 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/brsynth/CRedisDict",
     packages=setuptools.find_packages(),
-    test_suite='CRedisDict.tests',
-    # test_suite='nose.collector',
-    # tests_require=['nose'],
+    test_suite = 'discover_tests',
     install_requires=[
         'redis',
     ],
