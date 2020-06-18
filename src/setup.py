@@ -3,9 +3,14 @@ import setuptools
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
+requires = [
+    'redis',
+    'jsonpickle',
+]
+
 setuptools.setup(
     name="CRedisDict",
-    version="0.2.2",
+    version="0.2.3",
     author="Joan Hérisson",
     author_email="joan.herisson@univ-evry.fr",
     description="Dictionnary with complex data stored in a Redis database",
@@ -14,9 +19,8 @@ setuptools.setup(
     url="https://github.com/brsynth/CRedisDict",
     packages=setuptools.find_packages(),
     test_suite = 'discover_tests',
-    install_requires=[
-        'redis',
-    ],
+    test_requires=requires,
+    install_requires=requires,
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
