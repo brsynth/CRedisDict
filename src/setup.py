@@ -5,7 +5,6 @@ with open("README.md", "r") as fh:
 
 requires = [
     'redis',
-    'jsonpickle',
 ]
 
 setuptools.setup(
