@@ -10,7 +10,7 @@ requires = [
 
 setuptools.setup(
     name="CRedisDict",
-    version="0.2.3",
+    version="0.2.4",
     author="Joan Hérisson",
     author_email="joan.herisson@univ-evry.fr",
     description="Dictionnary with complex data stored in a Redis database",
