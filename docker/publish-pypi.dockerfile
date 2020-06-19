@@ -1,12 +1,6 @@
 ARG IMAGE
 FROM ${IMAGE}
 
-# RUN apt-get update
- # \
- # && apt-get install -y \
- #      gcc \
- #      musl-dev libffi-dev libressl-dev
-
 ARG FILE
 COPY ${FILE}.req .
 # install requirements
