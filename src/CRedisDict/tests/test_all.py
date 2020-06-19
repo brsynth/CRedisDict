@@ -112,8 +112,30 @@ class TestCRedisDict(unittest.TestCase):
         d['C'] = {'a': 1, 'b': 2}
         self.assertEqual(d['C'], {'a': 1, 'b': 2})
 
-    def test_copy(self):
+    def test_copyCRedisDict(self):
         self.redis.flushall()
         d1 = CRedisDict('d1', self.redis)
+        d1['A'] = '1'
+        d1['B'] = 'b'
+        d1['C'] = {'a': 1, 'b': 2}
         d2 = d1
         self.assertEqual(d1.dict(), d2.dict())
+
+    def test_copyDict(self):
+        self.redis.flushall()
+        d1 = {}
+        d1['A'] = '1'
+        d1['B'] = 'b'
+        d1['C'] = {'a': 1, 'b': 2}
+        d2 = CRedisDict('d2', self.redis)
+        d2.copy(d1)
+        self.assertEqual(d2.dict(), d1)
+
+    def test_equal(self):
+        self.redis.flushall()
+        d1 = {}
+        d1['A'] = '1'
+        d1['B'] = 'b'
+        d1['C'] = {'a': 1, 'b': 2}
+        d2 = CRedisDict('d2', self.redis, d1)
+        self.assertEqual(d2.dict(), d1)
