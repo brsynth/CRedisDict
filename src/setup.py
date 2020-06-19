@@ -5,6 +5,7 @@ with open("README.md", "r") as fh:
 
 requires = [
     'redis',
+    'brs-utils',
 ]
 
 setuptools.setup(
