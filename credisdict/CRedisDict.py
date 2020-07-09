@@ -29,6 +29,7 @@ def wait_for_redis(redis_conn, time_limit):
     else: print_FAILED()
     return redis_on
 
+
 class CRedisDict:
     """A redis based dict."""
 
