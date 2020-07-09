@@ -8,6 +8,7 @@ from sys import _getframe
 from json import loads as json_loads
 from json import dumps as json_dumps
 from redis import Redis
+from time import time, sleep
 from brs_utils import check_nb_args
 
 from redis import ConnectionError as redis_conn_error
