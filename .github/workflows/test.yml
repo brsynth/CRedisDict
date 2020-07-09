@@ -81,7 +81,7 @@ jobs:
     - name: Start redis instance
       run: |
         cd tests
-        sh ./test-in-docker.sh
+        bash ./test-in-docker.sh
 
     # - name: Test
     #   run: |
