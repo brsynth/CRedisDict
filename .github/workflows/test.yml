@@ -72,4 +72,12 @@ jobs:
     - name: Test
       run: |
         cd tests
-        bash ./test-in-docker.sh
+        source ../.env
+        PACKAGE=$PACKAGE \
+        HOMEDIR=$HOMEDIR \
+        docker-compose \
+            -f pytest/docker/docker-compose.yml \
+            --env-file pytest/docker/.env \
+            build
+        pytest --verbose
+        # bash ./test-in-docker.sh
