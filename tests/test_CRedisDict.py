@@ -10,6 +10,7 @@ from sys import exit as sys_exit
 from credisdict import CRedisDict, wait_for_redis
 from redis import StrictRedis
 
+
 # Cette classe est un groupe de tests. Son nom DOIT commencer
 # par 'Test' et la classe DOIT hériter de unittest.TestCase.
 class Test_CRedisDict(TestCase):
