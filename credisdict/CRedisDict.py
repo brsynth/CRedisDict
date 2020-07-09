@@ -9,7 +9,7 @@ from json import loads as json_loads
 from json import dumps as json_dumps
 from redis import Redis
 from time import time, sleep
-from brs_utils import check_nb_args
+from brs_utils import check_nb_args, print_OK, print_FAILED
 
 from redis import ConnectionError as redis_conn_error
 def wait_for_redis(redis_conn, time_limit):
@@ -91,21 +91,21 @@ class CRedisDict:
         # for key in redis_dict.keys():
         #     self.__setitem__(key, redis_dict[key])
 
-    def __eq__(self, *args):
-        if len(args) < 1:
-            raise TypeError(__eq__.name+' missing 1 required positional argument')
-        elif len(args) > 1:
-            raise TypeError(__eq__.name+' takes 1 positional arguments but '+len(args)+' were given')
-
-        d = self.dict()
-        if isinstance(args[0], dict):
-            if d[key]!=args[0][key]:
-                return False
-        elif isinstance(args[0], CRedisDict):
-            d_in = args[0].dict()
-            # No need to copy data as there are already in redis
-            if d[key]!=d_in[key]:
-                return False
+    # def __eq__(self, *args):
+    #     if len(args) < 1:
+    #         raise TypeError(__eq__.name+' missing 1 required positional argument')
+    #     elif len(args) > 1:
+    #         raise TypeError(__eq__.name+' takes 1 positional arguments but '+len(args)+' were given')
+    #
+    #     d = self.dict()
+    #     if isinstance(args[0], dict):
+    #         if d[key]!=args[0][key]:
+    #             return False
+    #     elif isinstance(args[0], CRedisDict):
+    #         d_in = args[0].dict()
+    #         # No need to copy data as there are already in redis
+    #         if d[key]!=d_in[key]:
+    #             return False
 
     def update(self, redis_dict):
         for field in redis_dict:
