@@ -1,5 +1,0 @@
-#!/bin/sh
-
-cd docker
-docker-compose run --rm pkg-test
-docker-compose down -v

@@ -10,6 +10,24 @@ from json import dumps as json_dumps
 from redis import Redis
 from brs_utils import check_nb_args
 
+from redis import ConnectionError as redis_conn_error
+def wait_for_redis(redis_conn, time_limit):
+    redis_on = False
+    start = time()
+    end = time()
+    print("Waiting for redis connection...", end = '', flush=True)
+    while (not redis_on) and (end-start<time_limit) :
+        try:
+            redis_conn.ping()
+            redis_on = True
+        except redis_conn_error:
+            print(".", end = '', flush=True)
+            sleep(5)
+            end = time()
+    if redis_on: print_OK()
+    else: print_FAILED()
+    return redis_on
+
 class CRedisDict:
     """A redis based dict."""
 
