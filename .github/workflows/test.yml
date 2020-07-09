@@ -73,7 +73,7 @@ jobs:
     - name: Start redis instance
       run: |
         cd tests
-        bash ./test-in-docker.sh
+        sh ./test-in-docker.sh
 
     # - name: Install dependencies
     #   run: |
