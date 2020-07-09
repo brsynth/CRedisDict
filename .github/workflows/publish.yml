@@ -40,7 +40,7 @@ jobs:
     - name: Add channels
       run: |
         conda config \
-          --add channels sbmlteam \
+          --add channels anaconda \
           --add channels brsynth
     - name: Build
       run: |
