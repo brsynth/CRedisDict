@@ -1,4 +1,5 @@
 from setuptools import setup
+import distutils.command.bdist_conda
 
 
 _readme = 'README.md'
@@ -13,8 +14,15 @@ with open(_readme, 'r') as f:
 
 required = []
 with open(_package+'/requirements.txt', 'r') as f:
-    for l in f:
-        required += [l]
+    required = [line.splitlines()[0] for line in f]
+# hack to handle diff between pip and conda 'redis' package name
+if 'redis' in required:
+    from sys import argv as sys_argv
+    if 'bdist_conda' in sys_argv:
+        for i,elt in enumerate(required):
+            if elt=='redis':
+                required[i] = 'redis-py'
+
 
 _release = 'RELEASE'
 # extra_files={
@@ -28,16 +36,18 @@ with open(_release, 'r') as f:
 setup(
     name=_package,
     version=_version,
+    distclass=distutils.command.bdist_conda.CondaDistribution,
     author='Melchior du Lac, Joan Hérisson',
     author_email='joan.herisson@univ-evry.fr',
     description='BRSynth Utilities',
     long_description=long_description,
     long_description_content_type='text/markdown',
-    url='https://github.com/brsynth/RRulesParser',
+    url='https://github.com/brsynth/CRedisDict',
     packages=[_package],
     # package_dir={_package: _package},
     install_requires=required,
-    test_suite='discover_tests',
+    tests_require=required,
+    test_suite='pytest',
     package_data={_package: ['requirements.txt']},
 #    include_package_data=True,
 #    data_files=[v for v in extra_files.values()],
