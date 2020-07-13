@@ -3,5 +3,6 @@
     - add publication to Anaconda cloud
     - handle 'redis' different names for pip and conda
 
+
 0.3.2 - Jul 02, 2020
     - first version
