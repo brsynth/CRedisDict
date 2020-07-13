@@ -15,12 +15,12 @@ required = []
 with open(_package+'/requirements.txt', 'r') as f:
     required = [line.splitlines()[0] for line in f]
 # hack to handle diff between pip and conda 'redis' package name
-if 'redis' in required:
+if any('redis' in s for s in required):
     from sys import argv as sys_argv
     if 'bdist_conda' in sys_argv:
         for i,elt in enumerate(required):
-            if elt=='redis':
-                required[i] = 'redis-py'
+            if 'redis' in elt:
+                required[i] = required[i].replace('redis', 'redis-py')
 
 
 _release = 'RELEASE'
