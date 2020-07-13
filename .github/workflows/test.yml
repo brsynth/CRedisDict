@@ -78,5 +78,5 @@ jobs:
             -f pytest/docker/docker-compose.yml \
             --env-file pytest/docker/.env \
             up -d db
-        pytest --verbose
-        # bash ./test-in-docker.sh
+#        pytest --verbose
+        bash ./test-in-docker.sh

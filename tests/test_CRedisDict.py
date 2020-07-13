@@ -17,7 +17,7 @@ class Test_CRedisDict(TestCase):
 
     def __init__(self, testname):
         super(Test_CRedisDict, self).__init__(testname)
-        self.redis = StrictRedis(host='localhost', port=6379, db=0, decode_responses=True)
+        self.redis = StrictRedis(host='db', port=6379, db=0, decode_responses=True)
         self.redis.flushall()
 
     # init() + dict()
