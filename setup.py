@@ -1,5 +1,4 @@
 from setuptools import setup
-import distutils.command.bdist_conda
 
 
 _readme = 'README.md'
@@ -36,7 +35,6 @@ with open(_release, 'r') as f:
 setup(
     name=_package,
     version=_version,
-    distclass=distutils.command.bdist_conda.CondaDistribution,
     author='Melchior du Lac, Joan Hérisson',
     author_email='joan.herisson@univ-evry.fr',
     description='BRSynth Utilities',
