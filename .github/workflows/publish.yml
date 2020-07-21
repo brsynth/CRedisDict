@@ -51,7 +51,7 @@ jobs:
         conda skeleton pypi credisdict
     - name: Customize recipe
       run: |
-        sed -i 's/redis/redis-py/g' credisdict/meta.yaml
+        sed -i 's/ redis/ redis-py/g' credisdict/meta.yaml
     - name: Add channels
       run: |
         conda config \
