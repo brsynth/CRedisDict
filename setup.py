@@ -19,7 +19,7 @@ with open(_extras_path+'/requirements.txt', 'r') as f:
 # hack to handle diff between pip and conda 'redis' package name
 if any('redis' in s for s in required):
     from sys import argv as sys_argv
-    if 'bdist_conda' in sys_argv:
+    if 'conda' in sys_argv:
         for i,elt in enumerate(required):
             if 'redis' in elt:
                 required[i] = required[i].replace('redis', 'redis-py')
