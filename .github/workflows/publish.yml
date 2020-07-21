@@ -33,7 +33,6 @@ jobs:
         twine upload dist/*
 
   Conda:
-  Conda:
 
     runs-on: ubuntu-latest
 
