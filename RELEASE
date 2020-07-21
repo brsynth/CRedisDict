@@ -1,6 +1,7 @@
 0.3.4 - Jul 21, 2020
   - conda build for multiple versions of Python (3.5 -> 3.7)
 
+
 0.3.3 - Jul 09, 2020
     - refactor
     - add publication to Anaconda cloud
