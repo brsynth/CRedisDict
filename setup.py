@@ -40,7 +40,7 @@ setup(
     long_description_content_type='text/markdown',
     url='https://github.com/brsynth/CRedisDict',
     packages=[_package],
-    package_dir={_package: _package},
+    package_dir={_package: 'src'},
     include_package_data=True,
     install_requires=required,
     tests_require=required,
