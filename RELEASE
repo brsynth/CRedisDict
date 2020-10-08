@@ -1,3 +1,6 @@
+1.0.0 - Oct 8, 2020
+  - BREAKING CHANGE: 'len' method is replaced by '__len__' so 'len' is not available anymore
+
 0.3.6 - Sep 19, 2020
   - rename src folder
 
