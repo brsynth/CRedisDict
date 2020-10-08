@@ -54,11 +54,11 @@ class CRedisDict:
     def exists(redis, name):
         return redis.exists(name)
 
-    def len(self):
+    def __len__(self):
         return self.redis.hlen(self.name)
 
     def is_empty(self):
-        return self.len()==0
+        return self.__len__()==0
 
     def __iter__(self):
         return iter(self.keys())

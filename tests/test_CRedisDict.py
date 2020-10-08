@@ -70,10 +70,10 @@ class Test_CRedisDict(TestCase):
         d1['A'] = '1'
         d1['B'] = 'b'
         d1['C'] = {'a': 1, 'b': 2}
-        self.assertEqual(d1.len(), 3)
+        self.assertEqual(len(d1), 3)
         self.assertEqual(d1.is_empty(), False)
         d2 = CRedisDict('d2', self.redis)
-        self.assertEqual(d2.len(), 0)
+        self.assertEqual(len(d2), 0)
         self.assertEqual(d2.is_empty(), True)
 
     # update()
