@@ -5,6 +5,6 @@ Created on June 16 2020
 """
 
 from brs_utils  import print_OK, print_FAILED
-from credisdict.credisdict import CRedisDict, wait_for_redis
+from credisdict.CRedisDict import CRedisDict, wait_for_redis
 
 __all__ = ('CRedisDict', 'wait_for_redis', 'print_OK', 'print_FAILED')
