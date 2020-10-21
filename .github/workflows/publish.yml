@@ -30,7 +30,7 @@ jobs:
       run: |
         mkdir -p ${CONDA_BLD_PATH}
 
-    - name: Build and Test conda package
+    - name: Build conda package
       shell: bash -l {0}
       run: |
         conda build \
@@ -38,13 +38,13 @@ jobs:
           -c conda-forge \
           --output-folder ${CONDA_BLD_PATH} recipe
 
-    # - name: Test conda package
-    #   shell: bash -l {0}
-    #   run: |
-    #     conda build --test \
-    #       -c brsynth \
-    #       -c conda-forge \
-    #       ${CONDA_BLD_PATH}/*/credisdict-*.tar.bz2
+    - name: Test conda package
+      shell: bash -l {0}
+      run: |
+        conda build --test \
+          -c brsynth \
+          -c conda-forge \
+          ${CONDA_BLD_PATH}/*/credisdict-*.tar.bz2
 
     - name: Convert to other platforms
       shell: bash -l {0}
