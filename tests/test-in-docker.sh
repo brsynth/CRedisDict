@@ -21,5 +21,5 @@ docker-compose \
     -f pytest/docker/docker-compose.yml \
     --env-file pytest/docker/.env \
   run --rm \
-  --entrypoint="" \
-  tests sh -c "pytest --verbose $file"
+  tests sh -c "redis-server > /dev/null 2>&1 \
+             & pytest --verbose $file"
