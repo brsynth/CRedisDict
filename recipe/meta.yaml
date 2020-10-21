@@ -18,7 +18,7 @@ requirements:
   run:
     - python {{ python }}
     - brs_utils
-    - redis
+    - redis-py
 
 test:
   source_files:
@@ -28,7 +28,6 @@ test:
   requires:
     - pytest
   commands:
-    - python -m {{ name|lower }} --help
     - cd tests
     - pytest -v
 
