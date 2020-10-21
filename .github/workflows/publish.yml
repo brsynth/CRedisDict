@@ -35,7 +35,7 @@ jobs:
       run: |
         conda build \
           -c brsynth \
-          -c conda-forge \
+          -c anaconda \
           --output-folder ${CONDA_BLD_PATH} recipe
 
     - name: Test conda package
@@ -43,7 +43,7 @@ jobs:
       run: |
         conda build --test \
           -c brsynth \
-          -c conda-forge \
+          -c anaconda \
           ${CONDA_BLD_PATH}/*/credisdict-*.tar.bz2
 
     - name: Convert to other platforms
