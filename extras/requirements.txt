@@ -1,2 +1,0 @@
-redis
-brs_utils
