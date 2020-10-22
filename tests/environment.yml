@@ -1,0 +1,8 @@
+channels:
+  - brsynth
+  - conda-forge
+  - defaults
+dependencies:
+  - python >= 3.5
+  - brs_utils
+  - redis-py

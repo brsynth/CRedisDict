@@ -11,23 +11,8 @@ services:
         HOME: ${HOMEDIR}
         IMAGE: ${BASE_IMAGE}
       dockerfile: tests/pytest/docker/Dockerfile
-    networks:
-      db:
-    depends_on:
-      - db
-    entrypoint: pytest --verbose
-    command: test.py
-
-  db:
-    image: redis:5-alpine
-    command: redis-server --appendonly yes
-    networks:
-      db:
-    volumes:
-      - redis:/data
+    command: _main.py
 
 volumes:
-  redis:
-
-networks:
-  db:
+  input_cache:
+  cache:
