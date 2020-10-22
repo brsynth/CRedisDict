@@ -4,20 +4,19 @@ Created on June 17 2020
 @author: Joan Hérisson
 """
 
-from unittest import TestCase
-
-from sys import exit as sys_exit
+from unittest   import TestCase
 from credisdict import CRedisDict, wait_for_redis
-from redis import StrictRedis
+from redis      import StrictRedis
 
 
 # Cette classe est un groupe de tests. Son nom DOIT commencer
 # par 'Test' et la classe DOIT hériter de unittest.TestCase.
 class Test_CRedisDict(TestCase):
 
-    def __init__(self, testname):
-        super(Test_CRedisDict, self).__init__(testname)
-        self.redis = StrictRedis(host='db', port=6379, db=0, decode_responses=True)
+    def setUp(self):
+        self.redis = StrictRedis(host='localhost', port=6379, db=0, decode_responses=True)
+        if not wait_for_redis(self.redis, 10):
+            exit()
         self.redis.flushall()
 
     # init() + dict()
