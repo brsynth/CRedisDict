@@ -28,7 +28,7 @@ services:
     command: "conda build --test \
                 -c brsynth \
                 -c conda-forge \
-                ${CONDA_BLD_PATH}/*/brs_libs-*.tar.bz2"
+                ${CONDA_BLD_PATH}/*/${PACKAGE}-*.tar.bz2"
 
 volumes:
   input_cache:
