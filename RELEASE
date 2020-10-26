@@ -1,3 +1,6 @@
+1.2.0 - Oct 26, 2020
+  - provide Continous Integration toolkit
+
 1.1.0 - Oct 21, 2020
   - switch to pure conda packaging
   - publish for python3.8 and python3.9
