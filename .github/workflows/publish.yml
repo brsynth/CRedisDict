@@ -15,6 +15,7 @@ jobs:
       ANACONDA_USER: ${{secrets.ANACONDA_USER}}
       ANACONDA_LABEL: main
       CONDA_BLD_PATH: /tmp/conda-bld
+      PACKAGE: rrparser
 
     steps:
     - uses: actions/checkout@v2
@@ -54,7 +55,7 @@ jobs:
         conda build --test \
           -c brsynth \
           -c conda-forge \
-          ${CONDA_BLD_PATH}/*/credisdict-*.tar.bz2
+          ${CONDA_BLD_PATH}/*/${PACKAGE}-*.tar.bz2
 
     - name: Convert to other platforms
       shell: bash -l {0}
@@ -64,7 +65,7 @@ jobs:
           --platform linux-64 \
           --platform win-64 \
           --output-dir ${CONDA_BLD_PATH} \
-          ${CONDA_BLD_PATH}/*/credisdict-*
+          ${CONDA_BLD_PATH}/*/${PACKAGE}-*
 
     - name: Upload to anaconda
       shell: bash -l {0}
@@ -74,4 +75,4 @@ jobs:
           upload \
           --user ${ANACONDA_USER} \
           --label ${ANACONDA_LABEL} \
-          ${CONDA_BLD_PATH}/*/credisdict-*.tar.bz2
+          ${CONDA_BLD_PATH}/*/${PACKAGE}-*.tar.bz2
