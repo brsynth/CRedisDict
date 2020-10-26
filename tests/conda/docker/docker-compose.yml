@@ -30,6 +30,23 @@ services:
                 -c conda-forge \
                 ${CONDA_BLD_PATH}/*/${PACKAGE}-*.tar.bz2"
 
+  convert:
+    <<: *default
+    command: "conda convert \
+                --platform osx-64 \
+                --platform linux-64 \
+                --platform win-64 \
+                --output-dir ${CONDA_BLD_PATH} \
+                ${CONDA_BLD_PATH}/*/${PACKAGE}-*"
+
+  publish:
+    <<: *default
+    command: "anaconda \
+                upload \
+                --user brsynth \
+                --label main \
+                ${CONDA_BLD_PATH}/*/${PACKAGE}-*.tar.bz2"
+
 volumes:
   input_cache:
   cache:
