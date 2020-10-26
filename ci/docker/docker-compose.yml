@@ -1,0 +1,51 @@
+version: '3.8'
+
+x-image:
+   &default-image
+    image: ${PACKAGE}-tests_conda
+    build:
+      context: ../..
+      args:
+        HOME: ${HOMEDIR}
+        IMAGE: ${BASE_IMAGE}
+      dockerfile: ci/docker/Dockerfile
+
+x-volumes:
+    &default-volumes
+    working_dir: ${HOMEDIR}/ci
+    volumes:
+      - $PWD/..:${HOMEDIR}:ro
+      - conda_build:${CONDA_BLD_PATH}
+
+services:
+
+  clean:
+    image: alpine
+    <<: *default-volumes
+    command: scripts/clean_env.sh
+
+  build:
+    <<: *default-image
+    <<: *default-volumes
+    command: scripts/build.sh
+
+  test:
+    <<: *default-image
+    <<: *default-volumes
+    command: scripts/test.sh
+
+  convert:
+    <<: *default-image
+    <<: *default-volumes
+    command: scripts/convert.sh
+
+  publish:
+    <<: *default-image
+    <<: *default-volumes
+    command: scripts/publish.sh
+
+volumes:
+  input_cache:
+  cache:
+  conda_build:
+    name: ${PACKAGE}_conda_build
