@@ -52,7 +52,7 @@ The `ci/` folder is dedicated to continuous integration. From there, `check` and
 ### Check in docker
 `check-indocker.sh`: run `flake` and `bandit` across sources and `tests/` scripts.
 ### Test in docker
-`pytest-indocker.sh`: run `pytest` into `tests` folder.
+`pytest-indocker.sh`: run `pytest` into `tests` folder. Has to be used to debug since is much faster than `conda` process.
 ### Conda
 #### Full cycle (build-test-convert-publish)
 `conda-doAll-indocker.sh`: process into all ci steps from building to publishing.
