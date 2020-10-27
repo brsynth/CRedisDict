@@ -32,6 +32,17 @@ x-image-test:
         IMAGE: ${BASE_IMAGE}
       dockerfile: ci/docker/test.dockerfile
 
+x-image-run:
+   &default-image-run
+    image: ${PACKAGE}-run
+    build:
+      context: ../..
+      args:
+        PKG: ${PACKAGE}
+        HOME: ${HOMEDIR}
+        IMAGE: ${BASE_IMAGE}
+      dockerfile: ci/docker/run.dockerfile
+
 x-volumes:
     &default-volumes
     volumes:
@@ -86,6 +97,9 @@ services:
   pytest:
     <<: *default-image-test
     command: bash ci/pytest/cmd.sh
+
+  run:
+    <<: *default-image-run
 
 volumes:
   conda_build:
