@@ -8,14 +8,15 @@ _env_file     = 'ci/pytest/_environment.yml'
 env_file      = 'ci/pytest/environment.yml'
 channels_file = 'ci/pytest/channels.txt'
 recipe_file   = 'recipe/meta.yaml'
+bld_cfg_file  = 'recipe/conda_build_config.yaml'
 
 # output files
 cmd_file    = 'ci/pytest/cmd.sh'
 
-def parse_recipe():
+def parse_meta(filename):
 
     recipe = ''
-    with open(recipe_file, 'r') as f:
+    with open(filename, 'r') as f:
         line = f.readline()
         while line:
             # filter all non-YAML elements
@@ -37,6 +38,14 @@ def parse_recipe():
 
     return requirements, tests_cmd
 
+def parse_build_config(filename):
+    with open(filename, 'r') as f:
+        f_configs = f.read()
+        try: configs = yaml_safe_load(f_configs)
+        except TypeError: pass
+    return configs
+
+
 def write_dependencies(filename, requirements):
 
     channels = open(channels_file, 'r').read().split()
@@ -53,9 +62,15 @@ def write_commands(filename, cmd):
     with open(filename, 'w') as f:
         f.write(' ; '.join(tests_cmd))
 
-if os_path.exists(_env_file) and os_path.getsize(_env_file) > 0:
-    copyfile(_env_file, env_file)
-else:
-    requirements, tests_cmd = parse_recipe()
-    write_dependencies(env_file, requirements)
-    write_commands(cmd_file, tests_cmd)
+
+requirements, tests_cmd = parse_meta(recipe_file)
+write_dependencies(env_file, requirements)
+write_commands(cmd_file, tests_cmd)
+
+bld_cfgs = parse_build_config(bld_cfg_file)
+for pkg in bld_cfgs:
+    for ver in bld_cfgs[pkg]:
+        env_file_cfg = env_file+'.'+pkg+str(ver)
+        dep = pkg+'='+str(ver)
+        print(dep)
+        # write_dependencies(env_file_cfg, requirements+[dep])
