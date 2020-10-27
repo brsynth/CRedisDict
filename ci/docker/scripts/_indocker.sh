@@ -18,4 +18,4 @@ docker-compose \
     -f docker/docker-compose.yml \
     --env-file docker/.env \
   run --rm \
-  $1
+  $@
