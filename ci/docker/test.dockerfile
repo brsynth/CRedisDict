@@ -21,5 +21,14 @@ ADD tests tests
 ARG PKG
 ADD ${PKG} tests/${PKG}
 
-# run command into all environments created above
-ENTRYPOINT ["conda", "env", "list", "|cut", "-d\" \"", "-f1|tail", "-n+4 |grep", "test_|xargs", "-L", "1", "-I", "env"]
+RUN echo "#!/bin/sh" > /docker-entrypoint.sh
+RUN echo "conda env list \
+        | cut -d\" \" -f1 \
+        | tail -n+4 \
+        | grep test_ \
+        | xargs -L 1 -I env \
+        conda run -n env \$@" >> /docker-entrypoint.sh
+
+
+RUN chmod +x /docker-entrypoint.sh
+ENTRYPOINT ["/docker-entrypoint.sh"]
