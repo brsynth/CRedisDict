@@ -13,9 +13,6 @@ jobs:
     env:
       ANACONDA_TOKEN: ${{secrets.ANACONDA_TOKEN}}
       ANACONDA_USER: ${{secrets.ANACONDA_USER}}
-      # ANACONDA_LABEL: main
-      # CONDA_BLD_PATH: /tmp/conda-bld
-      # PACKAGE: rrparser
 
     steps:
     - uses: actions/checkout@v2
@@ -37,60 +34,22 @@ jobs:
       shell: bash -l {0}
       run: ./scripts/conda-build.sh
 
-    # - name: Build conda package
-    #   shell: bash -l {0}
-    #   run: |
-    #     conda build --no-test \
-    #       -c brsynth \
-    #       -c conda-forge \
-    #       --output-folder ${CONDA_BLD_PATH} recipe
-    #
     - name: Install Redis server
       shell: bash -l {0}
-      run: |
-        conda install -y -c anaconda redis
+      run: conda install -y -c anaconda redis
 
     - name: Start Redis server
       shell: bash -l {0}
-      run: |
-        redis-server &
+      run: redis-server --daemonize yes
 
     - name: Test conda package
       shell: bash -l {0}
       run: ./scripts/conda-test.sh
 
-    # - name: Test conda package
-    #   shell: bash -l {0}
-    #   run: |
-    #     conda build --test \
-    #       -c brsynth \
-    #       -c conda-forge \
-    #       ${CONDA_BLD_PATH}/*/${PACKAGE}-*.tar.bz2
-    #
     - name: Convert to other platforms
       shell: bash -l {0}
       run: ./scripts/conda-convert.sh
 
-    # - name: Convert to other platforms
-    #   shell: bash -l {0}
-    #   run: |
-    #     conda convert \
-    #       --platform osx-64 \
-    #       --platform linux-64 \
-    #       --platform win-64 \
-    #       --output-dir ${CONDA_BLD_PATH} \
-    #       ${CONDA_BLD_PATH}/*/${PACKAGE}-*
-
     - name: Upload to anaconda
       shell: bash -l {0}
       run: ./scripts/conda-publish.sh
-
-    # - name: Upload to anaconda
-    #   shell: bash -l {0}
-    #   run: |
-    #     anaconda \
-    #       --token ${ANACONDA_TOKEN} \
-    #       upload \
-    #       --user ${ANACONDA_USER} \
-    #       --label ${ANACONDA_LABEL} \
-    #       ${CONDA_BLD_PATH}/*/${PACKAGE}-*.tar.bz2
