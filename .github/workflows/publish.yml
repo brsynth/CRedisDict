@@ -13,9 +13,9 @@ jobs:
     env:
       ANACONDA_TOKEN: ${{secrets.ANACONDA_TOKEN}}
       ANACONDA_USER: ${{secrets.ANACONDA_USER}}
-      ANACONDA_LABEL: main
-      CONDA_BLD_PATH: /tmp/conda-bld
-      PACKAGE: rrparser
+      # ANACONDA_LABEL: main
+      # CONDA_BLD_PATH: /tmp/conda-bld
+      # PACKAGE: rrparser
 
     steps:
     - uses: actions/checkout@v2
@@ -27,14 +27,15 @@ jobs:
         miniconda-version: "latest"
         auto-activate-base: false
 
-    - name: Set up output folder
+    - name: Set up environment
       run: |
-        mkdir -p ${CONDA_BLD_PATH}
         cd ci
+        source .env
+        mkdir -p ${CONDA_BLD_PATH}
 
     - name: Build conda package
       shell: bash -l {0}
-      run: ./scripts/build.sh
+      run: ./scripts/conda-build.sh
 
     # - name: Build conda package
     #   shell: bash -l {0}
@@ -56,7 +57,7 @@ jobs:
 
     - name: Test conda package
       shell: bash -l {0}
-      run: ./scripts/test.sh
+      run: ./scripts/conda-test.sh
 
     # - name: Test conda package
     #   shell: bash -l {0}
@@ -68,7 +69,7 @@ jobs:
     #
     - name: Convert to other platforms
       shell: bash -l {0}
-      run: ./scripts/convert.sh
+      run: ./scripts/conda-convert.sh
 
     # - name: Convert to other platforms
     #   shell: bash -l {0}
@@ -82,7 +83,7 @@ jobs:
 
     - name: Upload to anaconda
       shell: bash -l {0}
-      run: ./scripts/publish.sh
+      run: ./scripts/conda-publish.sh
 
     # - name: Upload to anaconda
     #   shell: bash -l {0}
