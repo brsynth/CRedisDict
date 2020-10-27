@@ -8,8 +8,5 @@ RUN conda env create -n check --file conda_env_check.yml
 
 ARG HOME
 WORKDIR ${HOME}
-# ADD tests tests
-# ARG PKG
-# ADD ${PKG} ${PKG}
 
 ENTRYPOINT ["conda", "run", "-n", "check"]

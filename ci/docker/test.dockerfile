@@ -4,9 +4,6 @@ FROM ${IMAGE}
 RUN conda update -n base -c defaults conda \
  && conda install -y -c conda-forge pyyaml jinja2
 
-# --clone build
-# RUN conda env update -n test --file conda_env_test.yml
-
 ARG HOME
 WORKDIR ${HOME}/tests
 
