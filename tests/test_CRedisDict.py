@@ -19,7 +19,7 @@ class Test_CRedisDict(TestCase):
             exit()
         self.redis.flushall()
 
-    # init() + dict()
+    # init(redis) + dict()
     def test_initEmpty(self):
         self.redis.flushall()
         d = CRedisDict('d', self.redis)
@@ -53,7 +53,7 @@ class Test_CRedisDict(TestCase):
         self.assertEqual(d1.keys(), ['A', 'B', 'C'])
 
     # exists()
-    def test_keys(self):
+    def test_exists(self):
         self.redis.flushall()
         d1 = CRedisDict('d1', self.redis)
         d1['A'] = '1'
@@ -62,17 +62,26 @@ class Test_CRedisDict(TestCase):
         self.assertEqual(CRedisDict.exists(self.redis, 'd1'), True)
         self.assertEqual(CRedisDict.exists(self.redis, 'd2'), False)
 
-    # len() + is_empty
-    def test_keys(self):
+    # len()
+    def test_len(self):
         self.redis.flushall()
         d1 = CRedisDict('d1', self.redis)
         d1['A'] = '1'
         d1['B'] = 'b'
         d1['C'] = {'a': 1, 'b': 2}
         self.assertEqual(len(d1), 3)
-        self.assertEqual(d1.is_empty(), False)
         d2 = CRedisDict('d2', self.redis)
         self.assertEqual(len(d2), 0)
+
+    # is_empty
+    def test_empty(self):
+        self.redis.flushall()
+        d1 = CRedisDict('d1', self.redis)
+        d1['A'] = '1'
+        d1['B'] = 'b'
+        d1['C'] = {'a': 1, 'b': 2}
+        self.assertEqual(d1.is_empty(), False)
+        d2 = CRedisDict('d2', self.redis)
         self.assertEqual(d2.is_empty(), True)
 
     # update()

@@ -4,20 +4,21 @@ Created on April 10 2020
 @author: Joan Hérisson
 """
 
-from sys import _getframe
-from json import loads as json_loads
-from json import dumps as json_dumps
-from redis import Redis
-from time import time, sleep
+from sys       import _getframe
+from json      import loads as json_loads
+from json      import dumps as json_dumps
+from redis     import StrictRedis
+from time      import time, sleep
 from brs_utils import check_nb_args, print_OK, print_FAILED
+from redis     import ConnectionError as redis_conn_error
 
-from redis import ConnectionError as redis_conn_error
+
 def wait_for_redis(redis_conn, time_limit):
     redis_on = False
     start = time()
     end = time()
-    print("Waiting for redis connection...", end = '', flush=True)
-    while (not redis_on) and (end-start<time_limit) :
+    print("Waiting for redis connection...", end = '', flush = True)
+    while (not redis_on) and (end-start < time_limit):
         try:
             redis_conn.ping()
             redis_on = True
@@ -25,8 +26,10 @@ def wait_for_redis(redis_conn, time_limit):
             print(".", end = '', flush=True)
             sleep(5)
             end = time()
-    if redis_on: print_OK()
-    else: print_FAILED()
+    if redis_on:
+        print_OK()
+    else:
+        print_FAILED()
     return redis_on
 
 
@@ -58,7 +61,7 @@ class CRedisDict:
         return self.redis.hlen(self.name)
 
     def is_empty(self):
-        return self.__len__()==0
+        return self.__len__() == 0
 
     def __iter__(self):
         return iter(self.keys())
@@ -71,7 +74,8 @@ class CRedisDict:
         # JSON for nested dictionnaries
         if item:
             return json_loads(item)
-        else: raise KeyError
+        else:
+            raise KeyError
 
     def __setitem__(self, key, value):
         self.redis.hset(self.name, key, json_dumps(value))
