@@ -23,7 +23,7 @@ First, redis has to be installed and started:
 [sudo] redis-server --daemonize yes
 ```
 
-Then, the following code can be executed:
+Then, the following Python code can be executed:
 ```python
 from redis      import StrictRedis
 from credisdict import CRedisDict, wait_for_redis
@@ -48,9 +48,9 @@ pytest -v
 ```
 
 ## CI
-The folder `ci` is dedicated to continuous integration. From there, `check` and `test` steps can be process into Docker containers. In addition, the full `conda` cycle (build, test, convert and publish) can be process. Different commands are described below and have to be run from repository's `ci` folder.
+The `ci/` folder is dedicated to continuous integration. From there, `check` and `test` steps can be processed into Docker containers. In addition, the full `conda` cycle (`build`, `test`, `convert` and `publish`) can be processed. Different commands are described below and have to be run from  `ci/` folder.
 ### Check in docker
-`check-indocker.sh`: run `flake` and `bandit` across sources and `tests` scripts.
+`check-indocker.sh`: run `flake` and `bandit` across sources and `tests/` scripts.
 ### Test in docker
 `pytest-indocker.sh`: run `pytest` into `tests` folder.
 ### Conda
