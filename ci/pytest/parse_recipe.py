@@ -3,11 +3,14 @@ from yaml   import YAMLError
 from os     import path      as os_path
 from shutil import copyfile
 
-_env_file   = 'ci/pytest/_environment.yml'
-env_file    = 'ci/pytest/environment.yml'
+# input files
+_env_file     = 'ci/pytest/_environment.yml'
+env_file      = 'ci/pytest/environment.yml'
+channels_file = 'ci/pytest/channels.txt'
+recipe_file   = 'recipe/meta.yaml'
+
+# output files
 cmd_file    = 'ci/pytest/cmd.sh'
-recipe_file = 'recipe/meta.yaml'
-channels    = ['brsynth', 'conda-forge', 'defaults']
 
 def parse_recipe():
 
@@ -35,6 +38,9 @@ def parse_recipe():
     return requirements, tests_cmd
 
 def write_dependencies(filename, requirements):
+
+    channels = open(channels_file, 'r').read().split()
+
     with open(filename, 'w') as f:
         f.write('channels:\n')
         for c in channels:
