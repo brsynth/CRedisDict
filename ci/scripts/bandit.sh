@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ../extras/.env
+source extras/.env
 
 
 bandit -r ${PACKAGE}

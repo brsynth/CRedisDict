@@ -71,17 +71,17 @@ services:
   flake1:
     <<: *default-image-check
     <<: *default-volumes
-    command: scripts/flake_light
+    command: ci/scripts/flake_light.sh
 
   flake:
     <<: *default-image-check
     <<: *default-volumes
-    command: scripts/flake
+    command: ci/scripts/flake.sh
 
   bandit:
     <<: *default-image-check
     <<: *default-volumes
-    command: scripts/bandit.sh
+    command: ci/scripts/bandit.sh
 
   pytest:
     <<: *default-image-test

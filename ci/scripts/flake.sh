@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ../extras/.env
+source extras/.env
 
 
 # stop the build if there are Python syntax errors or undefined names
