@@ -55,7 +55,7 @@ The `ci/` folder is dedicated to continuous integration. From there, `check` and
 `pytest-indocker.sh`: run `pytest` into `tests` folder. Has to be used to debug since is much faster than `conda` process.
 ### Conda
 #### Full cycle (build-test-convert-publish)
-`conda-doAll-indocker.sh`: process into all ci steps from building to publishing.
+`conda-doAll-indocker.sh`: process into all ci steps from building to publishing. Publishing secrets ANACONDA_USER and ANACONDA_TOKEN have to be set in `ci/.secrets`.
 #### Clean
 `docker/scripts/conda-clean_env-indocker.sh`: clean the conda environment
 #### Build
@@ -65,7 +65,7 @@ The `ci/` folder is dedicated to continuous integration. From there, `check` and
 #### Convert
 `docker/scripts/conda-convert-indocker.sh`: run tests from conda package archive(s) built in the `build` step
 #### Publish
-`docker/scripts/conda-publish-indocker.sh`: publish package files from conda package archive(s) built and converted in the previous steps
+`docker/scripts/conda-publish-indocker.sh`: publish package files from conda package archive(s) built and converted in the previous steps. Publishing secrets ANACONDA_USER and ANACONDA_TOKEN have to be set in `ci/.secrets`.
 
 
 ## Authors
