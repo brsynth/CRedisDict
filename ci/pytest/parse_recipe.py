@@ -6,7 +6,7 @@ from shutil import copyfile
 # input files
 _env_file     = 'ci/pytest/_environment.yml'
 env_file      = 'ci/pytest/environment.yml'
-channels_file = 'ci/pytest/channels.txt'
+channels_file = 'recipe/conda_channels.txt'
 recipe_file   = 'recipe/meta.yaml'
 bld_cfg_file  = 'recipe/conda_build_config.yaml'
 
