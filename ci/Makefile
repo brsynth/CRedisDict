@@ -37,8 +37,8 @@ test: ## Test code with 'pytest', this is the fastest way to test the code
 ifneq ($(strip $(env)),)
 	$(eval env=${PACKAGE}_$*)
 endif
-	@$(MAKE_CMD) -f conda.mk check-environment-$* env=$(env)
-	@$(MAKE_CMD) -f conda.mk conda-run-env env=$(env) \
+	$(MAKE_CMD) -f conda.mk check-environment-$* env=$(env)
+	$(MAKE_CMD) -f conda.mk conda-run-env env=$(env) \
 																				 cmd="make -C .. $*" \
 																				 args="$(ARGS)"
 
