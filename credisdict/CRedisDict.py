@@ -7,7 +7,6 @@ Created on April 10 2020
 from sys       import _getframe
 from json      import loads as json_loads
 from json      import dumps as json_dumps
-from redis     import StrictRedis
 from time      import time, sleep
 from brs_utils import check_nb_args, print_OK, print_FAILED
 from redis     import ConnectionError as redis_conn_error
