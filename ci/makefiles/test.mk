@@ -36,9 +36,9 @@ flake: ## Run flake over code and tests
 	@flake8 ../../tests --count --ignore=E272,E501,E266,E241,E226,E251,E303,E221,E122,E211,E302 --exit-zero --max-complexity=10 --max-line-length=127 --statistics > /dev/null
 
 # TEST
-$(eval test_cmd := $(shell python ../test/parse_recipe.py test cmd))
+$(eval test_cmd := $(shell python3 ../test/parse_recipe.py test cmd))
 ifeq ($(args),)
-	test_src = $(shell python ../test/parse_recipe.py test src)
+	test_src = $(shell python3 ../test/parse_recipe.py test src)
 else
 	test_src = $(args)
 endif

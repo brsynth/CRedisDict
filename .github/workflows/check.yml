@@ -35,4 +35,6 @@ jobs:
       run: conda install -y make
 
     - name: Checking package
-      run: python --version
+      run: |
+        cd ci
+        make check-inconda
