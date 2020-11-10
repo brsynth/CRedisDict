@@ -59,6 +59,14 @@ if __name__ == '__main__':
             print()
 
     if any(arg in sys_argv for arg in ['requirements', 'req']):
+        print('channels:')
+        print('\n'.join(['  - '+c for c in open(channels_file, 'r').read().split()]))
+        print('dependencies:')
+        print('\n'.join(['  - '+c for c in requirements]))
+        print('  - pyyaml')
+        exit()
+
+        print(' '.join(['-c '+c for c in open(channels_file, 'r').read().split()]))
         if len(sys_argv) < 3:
             args = 'channels packages'
         else:

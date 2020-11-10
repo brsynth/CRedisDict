@@ -1,6 +1,10 @@
 include ../../extras/.env
 include ../.env
 
+tmpfile = $(shell mktemp -u)
+tmpdir  = $(shell dirname $(tmpfile))
+test_env_file = $(tmpdir)/test_env_file.yml
+
 PLATFORM = $(shell conda info | grep platform | awk '{print $$3}')
 
 # HELP
@@ -52,9 +56,6 @@ conda-recipe-check:
 	@echo -n "Checking the recipe... "
 	@conda build --check $(CONDA_BUILD_ARGS) ../../recipe > /dev/null
 	@echo OK
-### parse recipe
-conda-recipe-parse:
-	@python ../${TEST_PATH}/parse_recipe.py > /dev/null
 ### clean build products
 conda-clean-build:
 	@rm -rf ${CONDA_BLD_PATH}/*
@@ -221,9 +222,10 @@ ifeq (False,$(HAS_PYYAML))
 endif
 
 build_env_file = ../../recipe/conda_build_env.yaml
-test_env_file  = $(shell python ../$(TEST_PATH)/parse_recipe.py)
 check_env_file = ../test/check-environment.yml
-check-environment-%: check-conda check-pyyaml
+$(test_env_file): check-pyyaml
+	@python ../$(TEST_PATH)/parse_recipe.py req > $(test_env_file)
+check-environment-%: check-conda $(test_env_file)
 ifneq ("$(wildcard $(MY_ENV_DIR))","") # check if the directory is there
 		@echo ">>> Found '$(env)' environment in $(MY_ENV_DIR). Skipping installation..."
 else

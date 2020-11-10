@@ -1,14 +1,6 @@
 include ../../extras/.env
 include ../.env
 
-# TEST
-test_cmd = $(shell python ../test/parse_recipe.py test cmd)
-ifeq ($(args),)
-	test_src = $(shell python ../test/parse_recipe.py test src)
-else
-	test_src = $(args)
-endif
-
 
 # HELP
 # This will output the help for each task
@@ -20,8 +12,10 @@ help:
 
 .DEFAULT_GOAL := all
 
-# cli args
-ARGS = $(filter-out $@,$(MAKECMDGOALS))
+MAKE_CMD = $(MAKE) -s --no-print-directory
+
+# # cli args
+# ARGS = $(filter-out $@,$(MAKECMDGOALS))
 
 
 all: check test ## Run check and test code
@@ -40,6 +34,14 @@ flake: ## Run flake over code and tests
 	@flake8 ../../${PACKAGE} --count --ignore=E272,E501,E266,E241,E226,E251,E303,E221 --exit-zero --max-complexity=10 --max-line-length=127 --statistics > /dev/null
 	# exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
 	@flake8 ../../tests --count --ignore=E272,E501,E266,E241,E226,E251,E303,E221,E122,E211,E302 --exit-zero --max-complexity=10 --max-line-length=127 --statistics > /dev/null
+
+# TEST
+$(eval test_cmd := $(shell python ../test/parse_recipe.py test cmd))
+ifeq ($(args),)
+	test_src = $(shell python ../test/parse_recipe.py test src)
+else
+	test_src = $(args)
+endif
 
 test: ## Test code with 'pytest'
 	@export PYTHONPATH=$$PWD/../.. ; \
