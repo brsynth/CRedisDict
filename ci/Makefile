@@ -40,7 +40,7 @@ endif
 	@$(MAKE_CMD) -f conda.mk check-environment-$* env=$(env)
 	@$(MAKE_CMD) -f conda.mk conda-run-env env=$(env) \
 																				 cmd="make -C .. $*" \
-																				 args=$(ARGS)
+																				 args="$(ARGS)"
 
 # check-inconda: ## Test conda package
 # ifneq ($(strip $(env)),)
