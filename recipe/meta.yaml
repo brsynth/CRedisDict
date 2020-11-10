@@ -29,7 +29,6 @@ test:
     - pytest
     - redis
   commands:
-    - cd tests
     - redis-server --daemonize yes
     - pytest -v
 
